@@ -11,12 +11,13 @@
   var per;
   var counterRunning = false;
 
-  document.querySelector("#remainingTime").textContent = formattedTime;
-  document.querySelector("#breakLength").textContent = breakLength;
-  document.querySelector("#sessionLength").textContent = sessionLength;
+  document.querySelector("#time-left").textContent = formattedTime;
+  document.querySelector("#break-length").textContent = breakLength;
+  document.querySelector("#session-length").textContent = sessionLength;
 
-  document.querySelector("#timer").addEventListener("click", startTimer);
+  document.querySelector("#start_stop").addEventListener("click", startTimer);
   document.querySelector("#controls").addEventListener("click", changeTimes);
+  document.querySelector("#reset").addEventListener("click", reset);
 
   function startTimer() {
     countDownTimer = setInterval(function countDown() {
@@ -32,8 +33,10 @@
     counterRunning = true;
 
     // Toggle event listeners
-    document.querySelector("#timer").removeEventListener("click", startTimer);
-    document.querySelector("#timer").addEventListener("click", stopTimer);
+    document
+      .querySelector("#start_stop")
+      .removeEventListener("click", startTimer);
+    document.querySelector("#start_stop").addEventListener("click", stopTimer);
   }
 
   function stopTimer() {
@@ -42,8 +45,25 @@
     counterRunning = false;
 
     // Toggle event listeners
-    document.querySelector("#timer").removeEventListener("click", stopTimer);
-    document.querySelector("#timer").addEventListener("click", startTimer);
+    document
+      .querySelector("#start_stop")
+      .removeEventListener("click", stopTimer);
+    document.querySelector("#start_stop").addEventListener("click", startTimer);
+  }
+
+  function reset() {
+    stopTimer();
+    breakLength = 5;
+    sessionLength = 25;
+    if (currentMode === "Break!") {
+      switchMode();
+    } else {
+      totalSeconds = sessionLength * 60;
+      remainingSeconds = totalSeconds;
+    }
+    document.querySelector("#break-length").textContent = breakLength;
+    document.querySelector("#session-length").textContent = sessionLength;
+    render();
   }
 
   function render() {
@@ -60,11 +80,14 @@
       "%,#333333 " +
       per +
       "%)";
-    document.querySelector("#remainingTime").textContent = formattedTime;
+    document.querySelector("#time-left").textContent = formattedTime;
   }
 
   function formatTime(seconds) {
     var minutesToShow = Math.floor(seconds / 60);
+    if (minutesToShow < 10) {
+      minutesToShow = "0" + minutesToShow;
+    }
     var secondsToShow = seconds % 60;
     if (secondsToShow < 10) {
       secondsToShow = "0" + secondsToShow;
@@ -80,21 +103,25 @@
     if (counterRunning === false && target.nodeName === "BUTTON") {
       id = target.id;
       switch (id) {
-        case "breakMinus":
+        case "break-decrement":
           if (breakLength > 1) {
             breakLength--;
           }
           break;
-        case "breakPlus":
-          breakLength++;
+        case "break-increment":
+          if (breakLength < 60) {
+            breakLength++;
+          }
           break;
-        case "sessionMinus":
+        case "session-decrement":
           if (sessionLength > 1) {
             sessionLength--;
           }
           break;
-        case "sessionPlus":
-          sessionLength++;
+        case "session-increment":
+          if (sessionLength < 60) {
+            sessionLength++;
+          }
       }
 
       //update timer;
@@ -106,8 +133,8 @@
         remainingSeconds = totalSeconds;
       }
 
-      document.querySelector("#breakLength").textContent = breakLength;
-      document.querySelector("#sessionLength").textContent = sessionLength;
+      document.querySelector("#break-length").textContent = breakLength;
+      document.querySelector("#session-length").textContent = sessionLength;
 
       render();
     }
@@ -124,7 +151,7 @@
       fillColor = sessionColor;
     }
     remainingSeconds = totalSeconds;
-    document.querySelector("#timer > h2:first-child").textContent = currentMode;
+    document.querySelector("#timer-label").textContent = currentMode;
     render();
   }
 })();

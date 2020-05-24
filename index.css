@@ -47,18 +47,18 @@ h1 {
   cursor: pointer;
 }
 
-#timer > h2 {
+#timer > * {
   margin: 0;
   width: 100%;
   text-align: center;
   font-size: 32px;
 }
 
-#timer > h2:first-child {
+#timer-label {
   padding-top: 30px;
 }
 
-#timer > h2:last-child {
+#time-left {
   padding-bottom: 30px;
   height: 38px;
 }

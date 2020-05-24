@@ -16,24 +16,27 @@
 
       <div id="timerContainer">
         <div id="timer">
-          <h2>Session</h2>
-          <h2 id="remainingTime"></h2>
+          <h2 id="timer-label">Session</h2>
+          <span id="time-left">25:00</span>
         </div>
       </div>
 
+      <button id="start_stop">Play / Pause</button>
+      <button id="reset">Reset</button>
+
       <div id="controls">
-        <div class="buttonGroup" id="breakButtons">
-          <h3>Break Length</h3>
-          <button id="breakPlus">+</button>
-          <span id="breakLength"></span>
-          <button id="breakMinus">&minus;</button>
+        <div class="buttonGroup">
+          <h3 id="break-label">Break</h3>
+          <button id="break-increment">+</button>
+          <span id="break-length">5</span>
+          <button id="break-decrement">&minus;</button>
         </div>
 
-        <div class="buttonGroup" id="sessionButtons">
-          <h3>Session Length</h3>
-          <button id="sessionPlus">+</button>
-          <span id="sessionLength"></span>
-          <button id="sessionMinus">&minus;</button>
+        <div class="buttonGroup">
+          <h3 id="session-label">Session</h3>
+          <button id="session-increment">+</button>
+          <span id="session-length">25</span>
+          <button id="session-decrement">&minus;</button>
         </div>
       </div>
     </div>
