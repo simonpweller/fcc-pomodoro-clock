@@ -1,0 +1,103 @@
+body {
+  background-color: #333333;
+  color: white;
+
+  font-family: Roboto, sans-serif;
+}
+
+#mainContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 25px auto 0 auto;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1 {
+  text-align: center;
+  width: 100%;
+  margin: 20px 0 20px 0;
+  font-size: 6vh;
+}
+
+#timerContainer {
+  border: 2px solid lime;
+  border-radius: 50%;
+  height: 250px;
+  width: 250px;
+  margin: 20px auto 20px auto;
+}
+
+#timer {
+  background-color: lime;
+
+  background-image: linear-gradient(to top, lime, lime 0%, #333333 0%);
+
+  border-radius: 50%;
+  height: 240px;
+  width: 240px;
+  margin: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+
+  cursor: pointer;
+}
+
+#timer > h2 {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+}
+
+#timer > h2:first-child {
+  padding-top: 30px;
+}
+
+#timer > h2:last-child {
+  padding-bottom: 30px;
+  height: 38px;
+}
+
+#controls {
+  width: 100%;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.buttonGroup {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.buttonGroup > span {
+  font-size: 30px;
+  width: 34px;
+  text-align: center;
+}
+
+.buttonGroup > h3 {
+  width: 100%;
+  text-align: center;
+
+  font-weight: normal;
+  font-variant: small-caps;
+  font-size: 20px;
+}
+
+button {
+  background-color: inherit;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}

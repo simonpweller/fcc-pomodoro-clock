@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pomodoro Clock</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="mainContainer">
+      <h1>Pomodoro Clock</h1>
+
+      <div id="timerContainer">
+        <div id="timer">
+          <h2>Session</h2>
+          <h2 id="remainingTime"></h2>
+        </div>
+      </div>
+
+      <div id="controls">
+        <div class="buttonGroup" id="breakButtons">
+          <h3>Break Length</h3>
+          <button id="breakPlus">+</button>
+          <span id="breakLength"></span>
+          <button id="breakMinus">&minus;</button>
+        </div>
+
+        <div class="buttonGroup" id="sessionButtons">
+          <h3>Session Length</h3>
+          <button id="sessionPlus">+</button>
+          <span id="sessionLength"></span>
+          <button id="sessionMinus">&minus;</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
