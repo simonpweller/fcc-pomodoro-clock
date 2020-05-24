@@ -53,6 +53,9 @@
 
   function reset() {
     stopTimer();
+    const beep = document.querySelector("#beep");
+    beep.pause();
+    beep.currentTime = 0;
     breakLength = 5;
     sessionLength = 25;
     if (currentMode === "Break!") {
@@ -141,6 +144,7 @@
   }
 
   function switchMode() {
+    document.querySelector("#beep").play();
     if (currentMode === "Session") {
       currentMode = "Break!";
       fillColor = breakColor;
