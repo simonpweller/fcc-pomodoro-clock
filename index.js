@@ -1,17 +1,14 @@
 (function () {
-  var sessionLength = 25;
-  var breakLength = 5;
-  var totalSeconds = sessionLength * 60;
-  var remainingSeconds = totalSeconds;
-  var formattedTime = formatTime(remainingSeconds);
-  var countDownTimer;
-  var currentMode = "Session";
-  var fillColor = (sessionColor = "green");
-  var breakColor = "red";
-  var per;
-  var counterRunning = false;
+  let sessionLength = 25;
+  let breakLength = 5;
+  let remainingSeconds = sessionLength * 60;
+  let countDownTimer;
+  let currentMode = "Session";
+  let counterRunning = false;
 
-  document.querySelector("#time-left").textContent = formattedTime;
+  document.querySelector("#time-left").textContent = formatTime(
+    remainingSeconds
+  );
   document.querySelector("#break-length").textContent = breakLength;
   document.querySelector("#session-length").textContent = sessionLength;
 
@@ -61,8 +58,7 @@
     if (currentMode === "Break!") {
       switchMode();
     } else {
-      totalSeconds = sessionLength * 60;
-      remainingSeconds = totalSeconds;
+      remainingSeconds = sessionLength * 60;
     }
     document.querySelector("#break-length").textContent = breakLength;
     document.querySelector("#session-length").textContent = sessionLength;
@@ -70,28 +66,24 @@
   }
 
   function render() {
-    formattedTime = formatTime(remainingSeconds);
-    per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
+    const totalSeconds =
+      currentMode === "Session" ? sessionLength * 60 : breakLength * 60;
+    const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
 
-    document.querySelector("#timer").style.backgroundImage =
-      "linear-gradient(to top," +
-      fillColor +
-      "," +
-      fillColor +
-      " " +
-      per +
-      "%,#333333 " +
-      per +
-      "%)";
-    document.querySelector("#time-left").textContent = formattedTime;
+    document.querySelector(
+      "#timer"
+    ).style.backgroundImage = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${per}%,#333333 ${per}%)`;
+    document.querySelector("#time-left").textContent = formatTime(
+      remainingSeconds
+    );
   }
 
   function formatTime(seconds) {
-    var minutesToShow = Math.floor(seconds / 60);
+    let minutesToShow = Math.floor(seconds / 60);
     if (minutesToShow < 10) {
       minutesToShow = "0" + minutesToShow;
     }
-    var secondsToShow = seconds % 60;
+    let secondsToShow = seconds % 60;
     if (secondsToShow < 10) {
       secondsToShow = "0" + secondsToShow;
     }
@@ -100,12 +92,8 @@
 
   function changeTimes(e) {
     // modify sessionLength and breakLength, reset timer;
-    var target = e.target;
-    var id;
-
-    if (counterRunning === false && target.nodeName === "BUTTON") {
-      id = target.id;
-      switch (id) {
+    if (counterRunning === false && e.target.nodeName === "BUTTON") {
+      switch (e.target.id) {
         case "break-decrement":
           if (breakLength > 1) {
             breakLength--;
@@ -129,11 +117,9 @@
 
       //update timer;
       if (currentMode === "Session") {
-        totalSeconds = sessionLength * 60;
-        remainingSeconds = totalSeconds;
+        remainingSeconds = sessionLength * 60;
       } else {
-        totalSeconds = breakLength * 60;
-        remainingSeconds = totalSeconds;
+        remainingSeconds = breakLength * 60;
       }
 
       document.querySelector("#break-length").textContent = breakLength;
@@ -147,15 +133,16 @@
     document.querySelector("#beep").play();
     if (currentMode === "Session") {
       currentMode = "Break!";
-      fillColor = breakColor;
-      totalSeconds = breakLength * 60;
+      remainingSeconds = breakLength * 60;
     } else {
       currentMode = "Session";
-      totalSeconds = sessionLength * 60;
-      fillColor = sessionColor;
+      remainingSeconds = sessionLength * 60;
     }
-    remainingSeconds = totalSeconds;
     document.querySelector("#timer-label").textContent = currentMode;
     render();
+  }
+
+  function getFillColor() {
+    return currentMode === "Session" ? "green" : "red";
   }
 })();
