@@ -59,8 +59,8 @@
     $("#time-left").textContent = formatTime(remainingSeconds);
 
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
-    const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
-    const linearGradient = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${per}%,#333333 ${per}%)`;
+    const percent = Math.round((1 - remainingSeconds / totalSeconds) * 100);
+    const linearGradient = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${percent}%,#333333 ${percent}%)`;
 
     $("#timer").style.backgroundImage = linearGradient;
   }
