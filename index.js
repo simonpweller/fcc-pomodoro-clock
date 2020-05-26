@@ -34,6 +34,7 @@
     remainingSeconds--;
 
     if (remainingSeconds < 0) {
+      document.querySelector("#beep").play();
       switchMode();
     }
     render();
@@ -120,7 +121,6 @@
   }
 
   function switchMode() {
-    document.querySelector("#beep").play();
     isBreak = !isBreak;
     remainingSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     document.querySelector("#timer-label").textContent = isBreak
