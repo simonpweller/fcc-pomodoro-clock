@@ -6,10 +6,6 @@
   let isBreak = false;
   let counterRunning = false;
 
-  document.querySelector("#time-left").textContent = formatTime(
-    remainingSeconds
-  );
-
   document.querySelector("#start_stop").addEventListener("click", toggleTimer);
   document.querySelector("#controls").addEventListener("click", changeTimes);
   document.querySelector("#reset").addEventListener("click", reset);
@@ -62,6 +58,9 @@
     document.querySelector("#timer-label").textContent = isBreak
       ? "Break!"
       : "Session";
+    document.querySelector("#time-left").textContent = formatTime(
+      remainingSeconds
+    );
 
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
@@ -69,9 +68,6 @@
     document.querySelector(
       "#timer"
     ).style.backgroundImage = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${per}%,#333333 ${per}%)`;
-    document.querySelector("#time-left").textContent = formatTime(
-      remainingSeconds
-    );
   }
 
   function formatTime(seconds) {
