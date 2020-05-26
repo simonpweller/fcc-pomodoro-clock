@@ -59,6 +59,10 @@
     document.querySelector("#break-length").textContent = breakLength;
     document.querySelector("#session-length").textContent = sessionLength;
 
+    document.querySelector("#timer-label").textContent = isBreak
+      ? "Break!"
+      : "Session";
+
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
 
@@ -121,9 +125,6 @@
   function switchMode() {
     isBreak = !isBreak;
     remainingSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
-    document.querySelector("#timer-label").textContent = isBreak
-      ? "Break!"
-      : "Session";
   }
 
   function getFillColor() {
