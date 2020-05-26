@@ -3,7 +3,7 @@
   let breakLength = 5;
   let remainingSeconds = sessionLength * 60;
   let countDownTimer;
-  let currentMode = "Session";
+  let isBreak = false;
   let counterRunning = false;
 
   document.querySelector("#time-left").textContent = formatTime(
@@ -46,7 +46,7 @@
     beep.currentTime = 0;
     breakLength = 5;
     sessionLength = 25;
-    if (currentMode === "Break!") {
+    if (isBreak) {
       switchMode();
     } else {
       remainingSeconds = sessionLength * 60;
@@ -57,8 +57,7 @@
   }
 
   function render() {
-    const totalSeconds =
-      currentMode === "Session" ? sessionLength * 60 : breakLength * 60;
+    const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
 
     document.querySelector(
@@ -107,10 +106,10 @@
       }
 
       //update timer;
-      if (currentMode === "Session") {
-        remainingSeconds = sessionLength * 60;
-      } else {
+      if (isBreak) {
         remainingSeconds = breakLength * 60;
+      } else {
+        remainingSeconds = sessionLength * 60;
       }
 
       document.querySelector("#break-length").textContent = breakLength;
@@ -122,17 +121,14 @@
 
   function switchMode() {
     document.querySelector("#beep").play();
-    if (currentMode === "Session") {
-      currentMode = "Break!";
-      remainingSeconds = breakLength * 60;
-    } else {
-      currentMode = "Session";
-      remainingSeconds = sessionLength * 60;
-    }
-    document.querySelector("#timer-label").textContent = currentMode;
+    isBreak = !isBreak;
+    remainingSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
+    document.querySelector("#timer-label").textContent = isBreak
+      ? "Break!"
+      : "Session";
   }
 
   function getFillColor() {
-    return currentMode === "Session" ? "green" : "red";
+    return isBreak ? "red" : "green";
   }
 })();
