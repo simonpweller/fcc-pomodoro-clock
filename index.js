@@ -54,15 +54,15 @@
   function render() {
     $("#break-length").textContent = breakLength;
     $("#session-length").textContent = sessionLength;
-
     $("#timer-label").textContent = isBreak ? "Break!" : "Session";
     $("#time-left").textContent = formatTime(remainingSeconds);
+    $("#timer").style.background = getBackgroundGradient();
+  }
 
+  function getBackgroundGradient() {
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const percent = Math.round((1 - remainingSeconds / totalSeconds) * 100);
-    const linearGradient = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${percent}%,#333333 ${percent}%)`;
-
-    $("#timer").style.backgroundImage = linearGradient;
+    return `linear-gradient(to top,${getFillColor()},${getFillColor()} ${percent}%,#333333 ${percent}%)`;
   }
 
   function formatTime(seconds) {
