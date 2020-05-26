@@ -9,12 +9,12 @@
   document.querySelector("#time-left").textContent = formatTime(
     remainingSeconds
   );
-  document.querySelector("#break-length").textContent = breakLength;
-  document.querySelector("#session-length").textContent = sessionLength;
 
   document.querySelector("#start_stop").addEventListener("click", toggleTimer);
   document.querySelector("#controls").addEventListener("click", changeTimes);
   document.querySelector("#reset").addEventListener("click", reset);
+
+  render();
 
   function toggleTimer() {
     counterRunning ? stopTimer() : startTimer();
@@ -52,12 +52,13 @@
     } else {
       remainingSeconds = sessionLength * 60;
     }
-    document.querySelector("#break-length").textContent = breakLength;
-    document.querySelector("#session-length").textContent = sessionLength;
     render();
   }
 
   function render() {
+    document.querySelector("#break-length").textContent = breakLength;
+    document.querySelector("#session-length").textContent = sessionLength;
+
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
 
@@ -112,9 +113,6 @@
       } else {
         remainingSeconds = sessionLength * 60;
       }
-
-      document.querySelector("#break-length").textContent = breakLength;
-      document.querySelector("#session-length").textContent = sessionLength;
 
       render();
     }
