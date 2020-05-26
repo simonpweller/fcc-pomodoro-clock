@@ -66,15 +66,11 @@
   }
 
   function formatTime(seconds) {
-    let minutesToShow = Math.floor(seconds / 60);
-    if (minutesToShow < 10) {
-      minutesToShow = "0" + minutesToShow;
-    }
-    let secondsToShow = seconds % 60;
-    if (secondsToShow < 10) {
-      secondsToShow = "0" + secondsToShow;
-    }
-    return minutesToShow + ":" + secondsToShow;
+    const formattedMinutes = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const formattedSeconds = (seconds % 60).toString().padStart(2, "0");
+    return `${formattedMinutes}:${formattedSeconds}`;
   }
 
   function changeTimes(e) {
