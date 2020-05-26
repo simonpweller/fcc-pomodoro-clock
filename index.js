@@ -8,6 +8,8 @@
   let isBreak = false;
   let counterRunning = false;
 
+  const beep = $("#beep");
+
   $("#start_stop").addEventListener("click", toggleTimer);
   $("#controls").addEventListener("click", changeTimes);
   $("#reset").addEventListener("click", reset);
@@ -32,7 +34,7 @@
     remainingSeconds--;
 
     if (remainingSeconds < 0) {
-      $("#beep").play();
+      beep.play();
       switchMode();
     }
     render();
@@ -40,7 +42,6 @@
 
   function reset() {
     stopTimer();
-    const beep = $("#beep");
     beep.pause();
     beep.currentTime = 0;
     breakLength = 5;
