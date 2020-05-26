@@ -45,11 +45,8 @@
     beep.currentTime = 0;
     breakLength = 5;
     sessionLength = 25;
-    if (isBreak) {
-      switchMode();
-    } else {
-      remainingSeconds = sessionLength * 60;
-    }
+    isBreak = false;
+    remainingSeconds = sessionLength * 60;
     render();
   }
 
