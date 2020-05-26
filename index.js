@@ -78,39 +78,35 @@
   }
 
   function changeTimes(e) {
-    // modify sessionLength and breakLength, reset timer;
-    if (counterRunning === false && e.target.nodeName === "BUTTON") {
-      switch (e.target.id) {
-        case "break-decrement":
-          if (breakLength > 1) {
-            breakLength--;
-          }
-          break;
-        case "break-increment":
-          if (breakLength < 60) {
-            breakLength++;
-          }
-          break;
-        case "session-decrement":
-          if (sessionLength > 1) {
-            sessionLength--;
-          }
-          break;
-        case "session-increment":
-          if (sessionLength < 60) {
-            sessionLength++;
-          }
-      }
-
-      //update timer;
-      if (isBreak) {
-        remainingSeconds = breakLength * 60;
-      } else {
-        remainingSeconds = sessionLength * 60;
-      }
-
-      render();
+    if (counterRunning || e.target.nodeName !== "BUTTON") {
+      return;
     }
+
+    switch (e.target.id) {
+      case "break-decrement":
+        if (breakLength > 1) {
+          breakLength--;
+        }
+        break;
+      case "break-increment":
+        if (breakLength < 60) {
+          breakLength++;
+        }
+        break;
+      case "session-decrement":
+        if (sessionLength > 1) {
+          sessionLength--;
+        }
+        break;
+      case "session-increment":
+        if (sessionLength < 60) {
+          sessionLength++;
+        }
+    }
+
+    remainingSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
+
+    render();
   }
 
   function switchMode() {
