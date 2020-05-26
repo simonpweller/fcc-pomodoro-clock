@@ -51,28 +51,6 @@
     render();
   }
 
-  function render() {
-    $("#break-length").textContent = breakLength;
-    $("#session-length").textContent = sessionLength;
-    $("#timer-label").textContent = isBreak ? "Break!" : "Session";
-    $("#time-left").textContent = formatTime(remainingSeconds);
-    $("#timer").style.background = getBackgroundGradient();
-  }
-
-  function getBackgroundGradient() {
-    const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
-    const percent = Math.round((1 - remainingSeconds / totalSeconds) * 100);
-    return `linear-gradient(to top,${getFillColor()},${getFillColor()} ${percent}%,#333333 ${percent}%)`;
-  }
-
-  function formatTime(seconds) {
-    const formattedMinutes = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const formattedSeconds = (seconds % 60).toString().padStart(2, "0");
-    return `${formattedMinutes}:${formattedSeconds}`;
-  }
-
   function changeTimes(e) {
     if (counterRunning || e.target.nodeName !== "BUTTON") {
       return;
@@ -108,6 +86,28 @@
   function switchMode() {
     isBreak = !isBreak;
     remainingSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
+  }
+
+  function render() {
+    $("#break-length").textContent = breakLength;
+    $("#session-length").textContent = sessionLength;
+    $("#timer-label").textContent = isBreak ? "Break!" : "Session";
+    $("#time-left").textContent = formatTime(remainingSeconds);
+    $("#timer").style.background = getBackgroundGradient();
+  }
+
+  function formatTime(seconds) {
+    const formattedMinutes = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const formattedSeconds = (seconds % 60).toString().padStart(2, "0");
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
+  function getBackgroundGradient() {
+    const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
+    const percent = Math.round((1 - remainingSeconds / totalSeconds) * 100);
+    return `linear-gradient(to top,${getFillColor()},${getFillColor()} ${percent}%,#333333 ${percent}%)`;
   }
 
   function getFillColor() {
