@@ -1,4 +1,6 @@
 (function () {
+  const $ = document.querySelector.bind(document);
+
   let sessionLength = 25;
   let breakLength = 5;
   let remainingSeconds = sessionLength * 60;
@@ -6,9 +8,9 @@
   let isBreak = false;
   let counterRunning = false;
 
-  document.querySelector("#start_stop").addEventListener("click", toggleTimer);
-  document.querySelector("#controls").addEventListener("click", changeTimes);
-  document.querySelector("#reset").addEventListener("click", reset);
+  $("#start_stop").addEventListener("click", toggleTimer);
+  $("#controls").addEventListener("click", changeTimes);
+  $("#reset").addEventListener("click", reset);
 
   render();
 
@@ -30,7 +32,7 @@
     remainingSeconds--;
 
     if (remainingSeconds < 0) {
-      document.querySelector("#beep").play();
+      $("#beep").play();
       switchMode();
     }
     render();
@@ -38,7 +40,7 @@
 
   function reset() {
     stopTimer();
-    const beep = document.querySelector("#beep");
+    const beep = $("#beep");
     beep.pause();
     beep.currentTime = 0;
     breakLength = 5;
@@ -52,22 +54,17 @@
   }
 
   function render() {
-    document.querySelector("#break-length").textContent = breakLength;
-    document.querySelector("#session-length").textContent = sessionLength;
+    $("#break-length").textContent = breakLength;
+    $("#session-length").textContent = sessionLength;
 
-    document.querySelector("#timer-label").textContent = isBreak
-      ? "Break!"
-      : "Session";
-    document.querySelector("#time-left").textContent = formatTime(
-      remainingSeconds
-    );
+    $("#timer-label").textContent = isBreak ? "Break!" : "Session";
+    $("#time-left").textContent = formatTime(remainingSeconds);
 
     const totalSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
     const per = Math.round((1 - remainingSeconds / totalSeconds) * 100);
+    const linearGradient = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${per}%,#333333 ${per}%)`;
 
-    document.querySelector(
-      "#timer"
-    ).style.backgroundImage = `linear-gradient(to top,${getFillColor()},${getFillColor()} ${per}%,#333333 ${per}%)`;
+    $("#timer").style.backgroundImage = linearGradient;
   }
 
   function formatTime(seconds) {
