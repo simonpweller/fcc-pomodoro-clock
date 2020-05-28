@@ -11,7 +11,7 @@
   const beep = $("#beep");
 
   $("#start_stop").addEventListener("click", toggleTimer);
-  $("#controls").addEventListener("click", changeTimes);
+  $("#duration-controls").addEventListener("click", changeTimes);
   $("#reset").addEventListener("click", reset);
 
   render();

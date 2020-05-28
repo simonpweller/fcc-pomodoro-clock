@@ -21,12 +21,49 @@
         </div>
       </div>
 
-      <button id="start_stop">Play / Pause</button>
-      <button id="reset">Reset</button>
+      <div class="controls">
+        <button id="start_stop" aria-label="play / pause">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            width="1em"
+            height="1em"
+            style="
+              -ms-transform: rotate(360deg);
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+            "
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path d="M3 5v14l8-7m2 7h3V5h-3m5 0v14h3V5" fill="white" />
+          </svg>
+        </button>
+        <button id="reset" aria-label="reset">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            width="1em"
+            height="1em"
+            style="
+              -ms-transform: rotate(360deg);
+              -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+            "
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.5 7a6.5 6.5 0 0 1 6.5 6.5a6.5 6.5 0 0 1-6.5 6.5H10v-2h3.5c2.5 0 4.5-2 4.5-4.5S16 9 13.5 9H7.83l3.08 3.09L9.5 13.5L4 8l5.5-5.5l1.42 1.41L7.83 7h5.67M6 18h2v2H6v-2z"
+              fill="white"
+            />
+          </svg>
+        </button>
+      </div>
 
       <audio id="beep" src="beep.mp3"></audio>
 
-      <div id="controls">
+      <div id="duration-controls" class="controls">
         <div class="buttonGroup">
           <h3 id="break-label">Break</h3>
           <button id="break-increment">+</button>
